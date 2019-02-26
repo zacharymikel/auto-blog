@@ -14,7 +14,18 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <ul class="list-group">
+                    @foreach($posts as $post)
+                        <li class="list-group-item list-group-container">
+                        <h3>{{ $post->title  }}</h3>
+                        <img src="{{ $post->image_name }}">
+                        <p>
+                            Created on {{ $post->created_at }}
+                            Last update on {{ $post->updated_at }}
+                        </p>
+                        </li>
+                    @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

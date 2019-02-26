@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\IPostRepository;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
+    protected $postRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(IPostRepository $postRepository)
     {
+        $this->postRepository = $postRepository;
         $this->middleware('auth');
     }
 
@@ -23,6 +27,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('admin', ['posts' => $this->postRepository->allRecent(5)]);
     }
 }
